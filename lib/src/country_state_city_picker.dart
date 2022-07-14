@@ -388,9 +388,10 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
                           _controller3.clear();
                           Navigator.pop(context);
                         },
-                        child: Text('Cloooose',
+                        child: Text('Close',
                         style: TextStyle(
                           color: Color(0xFFF16B52),
+                          fontSize: 16.0
                         ),),
                       )
                     ],
