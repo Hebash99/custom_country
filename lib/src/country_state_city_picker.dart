@@ -110,18 +110,24 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
              fontSize: 20,
            ),
           decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(left: 20),
             fillColor: const Color(0xFFFAFAFA),
             //        contentPadding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20.0),
             ),
             isDense: true,
-            hintText:(widget.initialCountry==null)? 'Country':widget.initialCountry,
-         hintStyle: const TextStyle(
-           fontSize: 20,
-           fontWeight: FontWeight.w700,
-           color: Color(0xFFB4B3B3),
-         ),
+            hintText:(widget.initialCountry==null||widget.initialCountry=='')? 'Country':widget.initialCountry,
+            hintStyle:  (widget.initialCountry==null||widget.initialCountry=='')?
+            TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFFB4B3B3),
+            ): TextStyle(
+              fontSize: 20,
+              // fontWeight: FontWeight.w700,
+              color: Colors.black,
+            ) ,
             suffixIcon: Icon(Icons.arrow_drop_down,color: Color(0xFFF16B52),),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20.0),
@@ -163,17 +169,23 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
             fontSize: 20,
           ),
          decoration: InputDecoration(
+           contentPadding: EdgeInsets.only(left: 20),
            fillColor: const Color(0xFFFAFAFA),
            border: OutlineInputBorder(
              borderRadius: BorderRadius.circular(20.0),
            ),
            isDense: true,
-           hintText: (widget.initialState==null)? 'State':widget.initialState,
-           hintStyle: const TextStyle(
+           hintText: (widget.initialState==null||widget.initialState='')? 'State':widget.initialState,
+           hintStyle:  (widget.initialState==null||widget.initialState=='')?
+           TextStyle(
              fontSize: 20,
              fontWeight: FontWeight.w700,
              color: Color(0xFFB4B3B3),
-           ),
+           ): TextStyle(
+             fontSize: 20,
+             // fontWeight: FontWeight.w700,
+             color: Colors.black,
+           ) ,
            suffixIcon: Icon(Icons.arrow_drop_down,color: Color(0xFFF16B52),),
            focusedBorder: OutlineInputBorder(
                borderRadius: BorderRadius.circular(20.0),
@@ -214,7 +226,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
             ),
             isDense: true,
             hintText: (widget.initialCity==null||widget.initialCity=='')? 'City':widget.initialCity,
-            hintStyle:  (widget.initialCity==null)?
+            hintStyle:  (widget.initialCity==null||widget.initialCity=='')?
              TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w700,
