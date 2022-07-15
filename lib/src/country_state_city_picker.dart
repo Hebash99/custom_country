@@ -100,7 +100,6 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
            },
           cursorColor: const Color(0xFFF16B52),
           cursorWidth: 3,
-           initialValue: (widget.initialCountry==null)? '':widget.initialCountry,
           onTap: (){
 
             setState(()=>_title='Country');
@@ -117,7 +116,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
               borderRadius: BorderRadius.circular(20.0),
             ),
             isDense: true,
-            hintText:'Country',
+            hintText:(widget.initialCountry==null)? 'Country':widget.initialCountry,
          hintStyle: const TextStyle(
            fontSize: 20,
            fontWeight: FontWeight.w700,
@@ -221,7 +220,8 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
               color: Color(0xFFB4B3B3),
             ): TextStyle(
               fontSize: 20,
-              fontWeight: FontWeight.w700,
+             // fontWeight: FontWeight.w700,
+            color: Colors.black,
             ) ,
             suffixIcon: Icon(Icons.arrow_drop_down,color: Color(0xFFF16B52),),
             focusedBorder: OutlineInputBorder(
