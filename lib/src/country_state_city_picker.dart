@@ -14,7 +14,7 @@ class CountryStateCityPicker extends StatefulWidget {
   String? initialCity;
   InputBorder? textFieldInputBorder;
 
-  CountryStateCityPicker({required this.country, required this.state, required this.city, this.textFieldInputBorder});
+  CountryStateCityPicker({required this.country, required this.state, required this.city,this.initialCountry, this.textFieldInputBorder});
 
   @override
   _CountryStateCityPickerState createState() => _CountryStateCityPickerState();
