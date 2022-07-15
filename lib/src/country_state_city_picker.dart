@@ -88,7 +88,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
 
   @override
   Widget build(BuildContext context) {
-    widget.country.text=widget.initialCountry;
+    widget.country.text=widget.initialCountry as String;
     return Column(
       children: [
         ///Country TextField
