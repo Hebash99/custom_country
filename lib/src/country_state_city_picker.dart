@@ -207,12 +207,13 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
              fontSize: 20,
            ),
           decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(left: 20),
             fillColor: const Color(0xFFFAFAFA),
             border: OutlineInputBorder(
               borderRadius: BorderRadius.circular(20.0),
             ),
             isDense: true,
-            hintText: (widget.initialCity==null)? 'City':widget.initialCity,
+            hintText: (widget.initialCity==null||widget.initialCity=='')? 'City':widget.initialCity,
             hintStyle:  (widget.initialCity==null)?
              TextStyle(
               fontSize: 20,
