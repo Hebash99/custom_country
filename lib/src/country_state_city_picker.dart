@@ -9,11 +9,11 @@ class CountryStateCityPicker extends StatefulWidget {
   TextEditingController country;
   TextEditingController state;
   TextEditingController city;
-  
+
   String? initialCountry;
   String? initialStatee;
   String? initialCity;
-  
+
   InputBorder? textFieldInputBorder;
 
   CountryStateCityPicker({required this.country, required this.state, required this.city,this.initialCountry, this.textFieldInputBorder});
@@ -33,8 +33,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   String _title='';
   String errorCountry='';
   String errorState='';
- 
-  String? hello;
+
   @override
   void initState() {
     super.initState();
@@ -102,7 +101,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
           cursorColor: const Color(0xFFF16B52),
           cursorWidth: 3,
           onTap: (){
-            
+
             setState(()=>_title='Country');
             _showDialog(context);
           },
@@ -117,7 +116,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
               borderRadius: BorderRadius.circular(20.0),
             ),
             isDense: true,
-            hintText:(hello==null)? 'Country':'helloooo',
+            hintText:(widget.initialCountry==null)? 'Country':widget.initialCountry,
          hintStyle: const TextStyle(
            fontSize: 20,
            fontWeight: FontWeight.w700,
