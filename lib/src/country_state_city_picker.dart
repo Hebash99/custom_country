@@ -118,9 +118,9 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
               borderRadius: BorderRadius.circular(20.0),
             ),
             isDense: true,
-           
+
             hintText: 'Country',
-            hintStyle: 
+            hintStyle:
             TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w700,
@@ -357,6 +357,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
                                   setState((){
                                     if(_title=="Country"){
                                       widget.country.text= _countrySubList[index].name;
+                                      widget.initialCountry=_countrySubList[index].name;
                                       _getState(_countrySubList[index].id);
                                       _countrySubList=_countryList;
                                       widget.state.clear();
