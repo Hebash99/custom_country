@@ -91,7 +91,8 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
       children: [
         ///Country TextField
          TextFormField(
-          controller: widget.country,
+           initialValue: (widget.initialCountry==null||widget.initialCountry=='')? 'Country':widget.initialCountry,
+         // controller: widget.country,
            validator: (String? value) {
              if (value == null || value == '') {
                return 'Please enter country';
@@ -117,17 +118,14 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
               borderRadius: BorderRadius.circular(20.0),
             ),
             isDense: true,
-            hintText:(widget.initialCountry==null||widget.initialCountry=='')? 'Country':widget.initialCountry,
-            hintStyle:  (widget.initialCountry==null||widget.initialCountry=='')?
+           
+            hintText: 'Country',
+            hintStyle: 
             TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w700,
               color: Color(0xFFB4B3B3),
-            ): TextStyle(
-              fontSize: 20,
-              // fontWeight: FontWeight.w700,
-              color: Colors.black,
-            ) ,
+            ),
             suffixIcon: Icon(Icons.arrow_drop_down,color: Color(0xFFF16B52),),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20.0),
