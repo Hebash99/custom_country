@@ -11,12 +11,12 @@ class CountryStateCityPicker extends StatefulWidget {
   TextEditingController city;
 
   String? initialCountry;
-  String? initialStatee;
+  String? initialState;
   String? initialCity;
 
   InputBorder? textFieldInputBorder;
 
-  CountryStateCityPicker({required this.country, required this.state, required this.city,this.initialCountry, this.textFieldInputBorder});
+  CountryStateCityPicker({required this.country, required this.state, required this.city,this.initialCountry,this.initialState,this.initialCity, this.textFieldInputBorder});
 
   @override
   _CountryStateCityPickerState createState() => _CountryStateCityPickerState();
@@ -168,7 +168,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
              borderRadius: BorderRadius.circular(20.0),
            ),
            isDense: true,
-           hintText: 'State',
+           hintText: (widget.initialState==null)? 'State':widget.initialState,
            hintStyle: const TextStyle(
              fontSize: 20,
              fontWeight: FontWeight.w700,
@@ -212,12 +212,16 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
               borderRadius: BorderRadius.circular(20.0),
             ),
             isDense: true,
-            hintText: 'City',
-            hintStyle: const TextStyle(
+            hintText: (widget.initialCity==null)? 'City':widget.initialCity,
+            hintStyle:  (widget.initialCity==null)?
+             TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w700,
               color: Color(0xFFB4B3B3),
-            ),
+            ): TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+            ) ,
             suffixIcon: Icon(Icons.arrow_drop_down,color: Color(0xFFF16B52),),
             focusedBorder: OutlineInputBorder(
                 borderRadius: BorderRadius.circular(20.0),
