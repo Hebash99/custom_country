@@ -91,8 +91,8 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
       children: [
         ///Country TextField
          TextFormField(
-           initialValue: (widget.initialCountry==null||widget.initialCountry=='')? 'Country':widget.initialCountry,
-         // controller: widget.country,
+           //initialValue: (widget.initialCountry==null||widget.initialCountry=='')? 'Country':widget.initialCountry,
+          controller: widget.country,
            validator: (String? value) {
              if (value == null || value == '') {
                return 'Please enter country';
@@ -356,8 +356,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
                                 onTap: ()async{
                                   setState((){
                                     if(_title=="Country"){
-                                      widget.country.text= _countrySubList[index].name;
-                                      widget.initialCountry=_countrySubList[index].name;
+                                      widget.country.text= hhh;
                                       _getState(_countrySubList[index].id);
                                       _countrySubList=_countryList;
                                       widget.state.clear();
