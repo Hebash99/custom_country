@@ -34,6 +34,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   String errorCountry='';
   String errorState='';
 
+  
   @override
   void initState() {
     super.initState();
@@ -87,11 +88,12 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
 
   @override
   Widget build(BuildContext context) {
+    widget.country.text=widget.initialCountry;
     return Column(
       children: [
         ///Country TextField
          TextFormField(
-           //initialValue: (widget.initialCountry==null||widget.initialCountry=='')? 'Country':widget.initialCountry,
+         //  initialValue: (widget.initialCountry==null||widget.initialCountry=='')? 'Country':widget.initialCountry,
           controller: widget.country,
            validator: (String? value) {
              if (value == null || value == '') {
@@ -356,7 +358,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
                                 onTap: ()async{
                                   setState((){
                                     if(_title=="Country"){
-                                      widget.country.text= 'hhh';
+                                      widget.country.text= _countrySubList[index].name;
                                       _getState(_countrySubList[index].id);
                                       _countrySubList=_countryList;
                                       widget.state.clear();
