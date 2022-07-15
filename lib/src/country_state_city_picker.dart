@@ -34,11 +34,12 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   String errorCountry='';
   String errorState='';
 
-  
+
   @override
   void initState() {
     super.initState();
     _getCountry();
+    widget.country.text=widget.initialCountry as String;
   }
 
   Future<void> _getCountry()async{
@@ -88,7 +89,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
 
   @override
   Widget build(BuildContext context) {
-    widget.country.text=widget.initialCountry as String;
+   
     return Column(
       children: [
         ///Country TextField
