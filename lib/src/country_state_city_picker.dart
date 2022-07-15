@@ -113,7 +113,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
               borderRadius: BorderRadius.circular(20.0),
             ),
             isDense: true,
-            hintText: (initialCountry==null)?'Country':initialCountry as String,
+            hintText: 'Country',
          hintStyle: const TextStyle(
            fontSize: 20,
            fontWeight: FontWeight.w700,
