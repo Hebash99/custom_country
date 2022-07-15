@@ -40,6 +40,8 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     super.initState();
     _getCountry();
     widget.country.text=widget.initialCountry as String;
+    widget.state.text=widget.initialState as String;
+    widget.city.text=widget.initialCity as String;
   }
 
   Future<void> _getCountry()async{
@@ -94,7 +96,6 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
       children: [
         ///Country TextField
          TextFormField(
-         //  initialValue: (widget.initialCountry==null||widget.initialCountry=='')? 'Country':widget.initialCountry,
           controller: widget.country,
            validator: (String? value) {
              if (value == null || value == '') {
@@ -176,17 +177,12 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
              borderRadius: BorderRadius.circular(20.0),
            ),
            isDense: true,
-           hintText: (widget.initialState==null||widget.initialState=='')? 'State':widget.initialState,
-           hintStyle:  (widget.initialState==null||widget.initialState=='')?
-           TextStyle(
+           hintText: 'State',
+           hintStyle:TextStyle(
              fontSize: 20,
              fontWeight: FontWeight.w700,
              color: Color(0xFFB4B3B3),
-           ): TextStyle(
-             fontSize: 20,
-             // fontWeight: FontWeight.w700,
-             color: Colors.black,
-           ) ,
+           ),
            suffixIcon: Icon(Icons.arrow_drop_down,color: Color(0xFFF16B52),),
            focusedBorder: OutlineInputBorder(
                borderRadius: BorderRadius.circular(20.0),
@@ -226,16 +222,11 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
               borderRadius: BorderRadius.circular(20.0),
             ),
             isDense: true,
-            hintText: (widget.initialCity==null||widget.initialCity=='')? 'City':widget.initialCity,
-            hintStyle:  (widget.initialCity==null||widget.initialCity=='')?
-             TextStyle(
+            hintText:'City',
+            hintStyle:TextStyle(
               fontSize: 20,
               fontWeight: FontWeight.w700,
               color: Color(0xFFB4B3B3),
-            ): TextStyle(
-              fontSize: 20,
-             // fontWeight: FontWeight.w700,
-            color: Colors.black,
             ) ,
             suffixIcon: Icon(Icons.arrow_drop_down,color: Color(0xFFF16B52),),
             focusedBorder: OutlineInputBorder(
