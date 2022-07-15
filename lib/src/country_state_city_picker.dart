@@ -9,6 +9,9 @@ class CountryStateCityPicker extends StatefulWidget {
   TextEditingController country;
   TextEditingController state;
   TextEditingController city;
+  String? initialCountry;
+  String? initialStatee;
+  String? initialCity;
   InputBorder? textFieldInputBorder;
 
   CountryStateCityPicker({required this.country, required this.state, required this.city, this.textFieldInputBorder});
@@ -110,7 +113,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
               borderRadius: BorderRadius.circular(20.0),
             ),
             isDense: true,
-            hintText: 'Country',
+            hintText: (initialCountry==null)?'Country':${initialCountry},
          hintStyle: const TextStyle(
            fontSize: 20,
            fontWeight: FontWeight.w700,
