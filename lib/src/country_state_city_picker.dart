@@ -356,7 +356,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
                                 onTap: ()async{
                                   setState((){
                                     if(_title=="Country"){
-                                      widget.country.text= hhh;
+                                      widget.country.text= 'hhh';
                                       _getState(_countrySubList[index].id);
                                       _countrySubList=_countryList;
                                       widget.state.clear();
