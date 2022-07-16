@@ -41,10 +41,8 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     _getCountry();
     _getIDCountry(widget.initialCountry);
     print(widget.initialCountryID);
-    _getState(widget.initialCountryID);
-
-    //print(widget.initialCountryID);
-    //_getState('1');
+   
+    
     widget.country.text=widget.initialCountry as String;
     widget.state.text=widget.initialState as String;
     widget.city.text=widget.initialCity as String;
@@ -73,6 +71,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
       if(_countryList[i].name==countryName){
         print(_countryList[i].id);
         widget.initialCountryID= _countryList[i].id;
+        _getState(widget.initialCountryID);
       }
     }
 
