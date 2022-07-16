@@ -34,7 +34,6 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   String errorCountry='';
   String errorState='';
 
-
   @override
   void initState() {
     super.initState();
@@ -53,6 +52,23 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
       _countrySubList=_countryList;
     });
   }
+Future<String> _getIDCountry(String countryName) async{
+  _countryList.clear();
+  var jsonString = await rootBundle.loadString('packages/country_state_city_pro/assets/country.json');
+  List<dynamic> body = json.decode(jsonString);
+  setState(() {
+    _countryList = body.map((dynamic item) => CountryModel.fromJson(item)).toList();
+    _countrySubList=_countryList;
+  });
+  for(int i=0;i<_countryList.length;i++)
+    {
+      if(_countryList[i].name==countryName){
+        print(_countryList[i].id);
+        return _countryList[i].id;
+      }
+       
+    }
+}
 
   Future<void> _getState(String countryId)async{
     _stateList.clear();
@@ -91,7 +107,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
 
   @override
   Widget build(BuildContext context) {
-   
+_getIDCountry('Albania');
     return Column(
       children: [
         ///Country TextField
@@ -106,7 +122,6 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
           cursorColor: const Color(0xFFF16B52),
           cursorWidth: 3,
           onTap: (){
-
             setState(()=>_title='Country');
             _showDialog(context);
           },
