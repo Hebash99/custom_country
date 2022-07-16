@@ -41,8 +41,6 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     _getCountry();
     _getIDCountry(widget.initialCountry);
     print(widget.initialCountryID);
-
-
     widget.country.text=widget.initialCountry as String;
     widget.state.text=widget.initialState as String;
     widget.city.text=widget.initialCity as String;
@@ -109,8 +107,15 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
           _stateList.add(element);
         });
       }
-    });
+    }
+    );
     _stateSubList=_stateList;
+    for(int i=0;i<_stateList.length;i++){
+      if(_stateList[i].name=stateName){
+        widget.initialStateID=_stateList[i].id;
+        _getCity(widget.initialStateID);
+      }
+    }
   }
 
 
