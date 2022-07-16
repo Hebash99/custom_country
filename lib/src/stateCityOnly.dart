@@ -40,6 +40,7 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
   @override
   void initState() {
     super.initState();
+    print(widget.countryID);
    // _getCountry();
     _getState(widget.countryID);
   }
@@ -54,9 +55,10 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
     });
   }
 
- 
+
 
   Future<void> _getState(String countryId)async{
+    print(widget.countryID);
     _stateList.clear();
     _cityList.clear();
     List<StateModel> _subStateList=[];
