@@ -344,9 +344,7 @@ class _CountryStateCityPicker2State extends State<CountryStateCityPicker2> {
                                   setState((){
                                     if(_title=="Country"){
                                      widget.country.text= _countrySubList[index].name;
-                                    print(_countrySubList[index].id);
                                       widget.countryID.text= _countrySubList[index].id;
-                                      print(widget.idCountry);
                                       _getState(_countrySubList[index].id);
                                       _countrySubList=_countryList;
                                       widget.state.clear();
