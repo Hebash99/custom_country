@@ -17,7 +17,7 @@ class CountryStateCityPicker extends StatefulWidget {
 
 
   String initialCountryID='888';
-
+  String initialStateID='888';
   CountryStateCityPicker({required this.country, required this.state, required this.city,this.initialCountry,this.initialState,this.initialCity, this.textFieldInputBorder});
 
   @override
@@ -41,8 +41,8 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     _getCountry();
     _getIDCountry(widget.initialCountry);
     print(widget.initialCountryID);
-   
-    
+
+
     widget.country.text=widget.initialCountry as String;
     widget.state.text=widget.initialState as String;
     widget.city.text=widget.initialCity as String;
@@ -71,13 +71,13 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
       if(_countryList[i].name==countryName){
         print(_countryList[i].id);
         widget.initialCountryID= _countryList[i].id;
-        _getState(widget.initialCountryID);
+        _getIDState(widget.initialCountryID);
       }
     }
 
 }
+ 
   Future<void> _getState(String countryId)async{
-    print('objectidhdffdfdfd');
     _stateList.clear();
     _cityList.clear();
     List<StateModel> _subStateList=[];
@@ -94,7 +94,26 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     });
     _stateSubList=_stateList;
   }
+  
+  Future<void> _getIDState(String countryId)async{
+    _stateList.clear();
+    _cityList.clear();
+    List<StateModel> _subStateList=[];
+    var jsonString = await rootBundle.loadString('packages/country_state_city_pro/assets/state.json');
+    List<dynamic> body = json.decode(jsonString);
 
+    _subStateList = body.map((dynamic item) => StateModel.fromJson(item)).toList();
+    _subStateList.forEach((element) {
+      if(element.countryId==countryId){
+        setState(() {
+          _stateList.add(element);
+        });
+      }
+    });
+    _stateSubList=_stateList;
+  }
+  
+  
   Future<void> _getCity(String stateId)async{
     _cityList.clear();
     List<CityModel> _subCityList=[];
