@@ -56,7 +56,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     });
   }
 
-  Future<String?> _getIDCountry(String? countryName) async{
+  Future<String> _getIDCountry(String? countryName) async{
   _countryList.clear();
   var jsonString = await rootBundle.loadString('packages/country_state_city_pro/assets/country.json');
   List<dynamic> body = json.decode(jsonString);
