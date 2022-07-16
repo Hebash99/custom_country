@@ -6,7 +6,7 @@ import './model/city_model.dart';
 import './model/country_model.dart';
 import './model/state_model.dart';
 
-class CountryStateCityPicker2 extends StatefulWidget {
+class CountryStateCityPicker3 extends StatefulWidget {
   TextEditingController country;
   TextEditingController state;
   TextEditingController city;
@@ -16,13 +16,13 @@ class CountryStateCityPicker2 extends StatefulWidget {
 
 
 
-  CountryStateCityPicker2({required this.country,required this.state,required this.city,required this.countryID, this.textFieldInputBorder});
+  CountryStateCityPicker3({required this.country,required this.state,required this.city,required this.countryID, this.textFieldInputBorder});
 
   @override
-  _CountryStateCityPicker2State createState() => _CountryStateCityPicker2State();
+  _CountryStateCityPicker3State createState() => _CountryStateCityPicker3State();
 }
 
-class _CountryStateCityPicker2State extends State<CountryStateCityPicker2> {
+class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
   List<CountryModel> _countryList=[];
   List<StateModel> _stateList=[];
   List<CityModel> _cityList=[];
