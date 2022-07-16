@@ -376,14 +376,13 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
                                     }
                                     else if(_title=='State'){
                                       widget.state.text= _stateSubList[index].name;
-                                      widget.stateID.text= _stateSubList[index].id;
                                       _getCity(_stateSubList[index].id);
                                       _stateSubList = _stateList;
                                       widget.city.clear();
                                     }
                                     else if(_title=='City'){
                                       widget.city.text= _citySubList[index].name;
-                                      widget.cityID.text= _citySubList[index].id;
+                                   
                                       _citySubList = _cityList;
                                     }
                                   });
