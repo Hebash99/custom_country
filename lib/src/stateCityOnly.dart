@@ -24,7 +24,7 @@ class CountryStateCityPicker3 extends StatefulWidget {
   _CountryStateCityPicker3State createState() => _CountryStateCityPicker3State();
 }
 
-class _CountryStateCityPicker3State extends State<CountryStateCityPicke3r> {
+class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
   List<CountryModel> _countryList=[];
   List<StateModel> _stateList=[];
   List<CityModel> _cityList=[];
