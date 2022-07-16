@@ -39,7 +39,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   void initState() {
     super.initState();
     _getCountry();
-     _getIDCountry(widget.initialCountry as String);
+     _getIDCountry(widget.initialCountry);
     widget.country.text=widget.initialCountry as String;
     widget.state.text=widget.initialState as String;
     widget.city.text=widget.initialCity as String;
