@@ -130,60 +130,60 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
     return Column(
       children: [
         ///Country TextField
-        // TextFormField(
-        //   controller: widget.country,
-        //   validator: (String? value) {
-        //     if (value == null || value == '') {
-        //       return 'Please enter country';
-        //     }
-        //     return null;
-        //   },
-        //   cursorColor: const Color(0xFFF16B52),
-        //   cursorWidth: 3,
-        //   onTap: (){
-        //     setState(()=>_title='Country');
-        //     _showDialog(context);
-        //   },
-        //   style: const TextStyle(
-        //     decoration: TextDecoration.none,
-        //     fontSize: 20,
-        //   ),
-        //   decoration: InputDecoration(
-        //     contentPadding: EdgeInsets.only(left: 20),
-        //     fillColor: const Color(0xFFFAFAFA),
-        //     //        contentPadding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
-        //     border: OutlineInputBorder(
-        //       borderRadius: BorderRadius.circular(20.0),
-        //     ),
-        //     isDense: true,
-        //
-        //     hintText: 'Country',
-        //     hintStyle:
-        //     TextStyle(
-        //       fontSize: 20,
-        //       fontWeight: FontWeight.w700,
-        //       color: Color(0xFFB4B3B3),
-        //     ),
-        //     suffixIcon: Icon(Icons.arrow_drop_down,color: Color(0xFFF16B52),),
-        //     focusedBorder: OutlineInputBorder(
-        //         borderRadius: BorderRadius.circular(20.0),
-        //         borderSide: const BorderSide(
-        //             color: Color(0xFFF16B52),
-        //             width: 3
-        //         )
-        //     ),
-        //     enabledBorder: OutlineInputBorder(
-        //         borderRadius: BorderRadius.circular(20.0),
-        //         borderSide: const BorderSide(
-        //             color: Color(0xFFE5E5E5),
-        //             width: 2
-        //         )),
-        //
-        //   ),
-        //   readOnly: true,
-        // ),
-        //
-        // SizedBox(height: 8.0),
+        TextFormField(
+          controller: widget.country,
+          validator: (String? value) {
+            if (value == null || value == '') {
+              return 'Please enter country';
+            }
+            return null;
+          },
+          cursorColor: const Color(0xFFF16B52),
+          cursorWidth: 3,
+          onTap: (){
+            setState(()=>_title='Country');
+            _showDialog(context);
+          },
+          style: const TextStyle(
+            decoration: TextDecoration.none,
+            fontSize: 20,
+          ),
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(left: 20),
+            fillColor: const Color(0xFFFAFAFA),
+            //        contentPadding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            isDense: true,
+
+            hintText: 'Country',
+            hintStyle:
+            TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFFB4B3B3),
+            ),
+            suffixIcon: Icon(Icons.arrow_drop_down,color: Color(0xFFF16B52),),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20.0),
+                borderSide: const BorderSide(
+                    color: Color(0xFFF16B52),
+                    width: 3
+                )
+            ),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20.0),
+                borderSide: const BorderSide(
+                    color: Color(0xFFE5E5E5),
+                    width: 2
+                )),
+
+          ),
+          readOnly: true,
+        ),
+
+        SizedBox(height: 8.0),
 
         ///State TextFormField
         TextFormField(
