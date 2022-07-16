@@ -16,7 +16,7 @@ class CountryStateCityPicker extends StatefulWidget {
   InputBorder? textFieldInputBorder;
 
 
-  
+  String initialCountryID='888';
 
   CountryStateCityPicker({required this.country, required this.state, required this.city,this.initialCountry,this.initialState,this.initialCity, this.textFieldInputBorder});
 
@@ -34,7 +34,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   String _title='';
   String errorCountry='';
   String errorState='';
-  String initialCountryID='888';
+
   @override
   void initState() {
     super.initState();
