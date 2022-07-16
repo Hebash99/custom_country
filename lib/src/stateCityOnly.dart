@@ -10,13 +10,17 @@ class CountryStateCityPicker3 extends StatefulWidget {
   TextEditingController country;
   TextEditingController state;
   TextEditingController city;
-  TextEditingController countryID;
+  String countryID;
+  TextEditingController stateID;
+  TextEditingController cityID;
 
   InputBorder? textFieldInputBorder;
 
 
 
-  CountryStateCityPicker3({required this.country,required this.state,required this.city,required this.countryID, this.textFieldInputBorder});
+  CountryStateCityPicker3({required this.country,required this.state,required this.city,required this.countryID,
+    required this.stateID,required this.cityID,
+    this.textFieldInputBorder});
 
   @override
   _CountryStateCityPicker3State createState() => _CountryStateCityPicker3State();
@@ -36,7 +40,8 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
   @override
   void initState() {
     super.initState();
-    _getCountry();
+   // _getCountry();
+    _getState(widget.countryID);
   }
 
   Future<void> _getCountry()async{
@@ -49,6 +54,7 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
     });
   }
 
+ 
 
   Future<void> _getState(String countryId)async{
     _stateList.clear();
@@ -90,61 +96,61 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
     return Column(
       children: [
         ///Country TextField
-         TextFormField(
-          controller: widget.country,
-           validator: (String? value) {
-             if (value == null || value == '') {
-               return 'Please enter country';
-             }
-             return null;
-           },
-          cursorColor: const Color(0xFFF16B52),
-          cursorWidth: 3,
-          onTap: (){
-            setState(()=>_title='Country');
-            _showDialog(context);
-          },
-           style: const TextStyle(
-             decoration: TextDecoration.none,
-             fontSize: 20,
-           ),
-          decoration: InputDecoration(
-            contentPadding: EdgeInsets.only(left: 20),
-            fillColor: const Color(0xFFFAFAFA),
-            //        contentPadding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
-            border: OutlineInputBorder(
-              borderRadius: BorderRadius.circular(20.0),
-            ),
-            isDense: true,
+        //  TextFormField(
+        //   controller: widget.country,
+        //    validator: (String? value) {
+        //      if (value == null || value == '') {
+        //        return 'Please enter country';
+        //      }
+        //      return null;
+        //    },
+        //   cursorColor: const Color(0xFFF16B52),
+        //   cursorWidth: 3,
+        //   onTap: (){
+        //     setState(()=>_title='Country');
+        //     _showDialog(context);
+        //   },
+        //    style: const TextStyle(
+        //      decoration: TextDecoration.none,
+        //      fontSize: 20,
+        //    ),
+        //   decoration: InputDecoration(
+        //     contentPadding: EdgeInsets.only(left: 20),
+        //     fillColor: const Color(0xFFFAFAFA),
+        //     //        contentPadding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
+        //     border: OutlineInputBorder(
+        //       borderRadius: BorderRadius.circular(20.0),
+        //     ),
+        //     isDense: true,
+        //
+        //     hintText: 'Country',
+        //     hintStyle:
+        //     TextStyle(
+        //       fontSize: 20,
+        //       fontWeight: FontWeight.w700,
+        //       color: Color(0xFFB4B3B3),
+        //     ),
+        //     suffixIcon: Icon(Icons.arrow_drop_down,color: Color(0xFFF16B52),),
+        //     focusedBorder: OutlineInputBorder(
+        //         borderRadius: BorderRadius.circular(20.0),
+        //         borderSide: const BorderSide(
+        //             color: Color(0xFFF16B52),
+        //             width: 3
+        //         )
+        //     ),
+        //     enabledBorder: OutlineInputBorder(
+        //         borderRadius: BorderRadius.circular(20.0),
+        //         borderSide: const BorderSide(
+        //             color: Color(0xFFE5E5E5),
+        //             width: 2
+        //         )),
+        //
+        //   ),
+        //   readOnly: true,
+        // ),
+        //
+        // SizedBox(height: 8.0),
 
-            hintText: 'Country',
-            hintStyle:
-            TextStyle(
-              fontSize: 20,
-              fontWeight: FontWeight.w700,
-              color: Color(0xFFB4B3B3),
-            ),
-            suffixIcon: Icon(Icons.arrow_drop_down,color: Color(0xFFF16B52),),
-            focusedBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20.0),
-                borderSide: const BorderSide(
-                    color: Color(0xFFF16B52),
-                    width: 3
-                )
-            ),
-            enabledBorder: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(20.0),
-                borderSide: const BorderSide(
-                    color: Color(0xFFE5E5E5),
-                    width: 2
-                )),
-
-          ),
-          readOnly: true,
-        ),
-
-        SizedBox(height: 8.0),
-/*
         ///State TextFormField
         TextFormField(
          controller: widget.state,
@@ -239,7 +245,6 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
           ),
           readOnly: true,
         ),
-*/
       ],
     );
   }
@@ -345,7 +350,7 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
                                   setState((){
                                     if(_title=="Country"){
                                      widget.country.text= _countrySubList[index].name;
-                                      widget.countryID.text= _countrySubList[index].id;
+                                   //   widget.countryID.text= _countrySubList[index].id;
                                       _getState(_countrySubList[index].id);
                                       _countrySubList=_countryList;
                                       widget.state.clear();
@@ -353,12 +358,14 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
                                     }
                                     else if(_title=='State'){
                                       widget.state.text= _stateSubList[index].name;
+                                      widget.stateID.text= _stateSubList[index].id;
                                       _getCity(_stateSubList[index].id);
                                       _stateSubList = _stateList;
                                       widget.city.clear();
                                     }
                                     else if(_title=='City'){
                                       widget.city.text= _citySubList[index].name;
+                                      widget.cityID.text= _citySubList[index].id;
                                       _citySubList = _cityList;
                                     }
                                   });
