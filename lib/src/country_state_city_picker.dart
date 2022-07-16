@@ -40,7 +40,9 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     super.initState();
     _getCountry();
     _getIDCountry(widget.initialCountry);
-   _getState(widget.initialCountryID);
+    print(widget.initialCountryID);
+    _getState(widget.initialCountryID);
+
     //print(widget.initialCountryID);
     //_getState('1');
     widget.country.text=widget.initialCountry as String;
@@ -76,6 +78,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
 
 }
   Future<void> _getState(String countryId)async{
+    print('objectidhdffdfdfd');
     _stateList.clear();
     _cityList.clear();
     List<StateModel> _subStateList=[];
@@ -112,7 +115,6 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: [
         ///Country TextField
