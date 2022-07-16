@@ -39,10 +39,11 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   void initState() {
     super.initState();
     _getCountry();
+    _getState('1');
  // (_getIDCountry(widget.initialCountry));
    // _getStateInit(_getIDCountry(widget.initialCountry) as Future<String> );
-
-
+    
+    
     widget.country.text=widget.initialCountry as String;
     widget.state.text=widget.initialState as String;
     widget.city.text=widget.initialCity as String;
@@ -77,24 +78,6 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
 }
 
   Future<void> _getState(String countryId)async{
-    _stateList.clear();
-    _cityList.clear();
-    List<StateModel> _subStateList=[];
-    var jsonString = await rootBundle.loadString('packages/country_state_city_pro/assets/state.json');
-    List<dynamic> body = json.decode(jsonString);
-
-    _subStateList = body.map((dynamic item) => StateModel.fromJson(item)).toList();
-    _subStateList.forEach((element) {
-      if(element.countryId==countryId){
-        setState(() {
-          _stateList.add(element);
-        });
-      }
-    });
-    _stateSubList=_stateList;
-  }
-
-  Future<void> _getStateInit(Future<String> countryId)async{
     _stateList.clear();
     _cityList.clear();
     List<StateModel> _subStateList=[];
@@ -389,14 +372,13 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
                                   setState((){
                                     if(_title=="Country"){
                                       widget.country.text= _countrySubList[index].name;
-                                      _getState('1');
+                                      _getState(_countrySubList[index].id);
                                       _countrySubList=_countryList;
                                       widget.state.clear();
                                       widget.city.clear();
                                     }
                                     else if(_title=='State'){
                                       widget.state.text= _stateSubList[index].name;
-                                      _getState('1');
                                       _getCity(_stateSubList[index].id);
                                       _stateSubList = _stateList;
                                       widget.city.clear();
