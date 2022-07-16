@@ -9,7 +9,7 @@ class CountryStateCityPicker2 extends StatefulWidget {
   TextEditingController country;
   TextEditingController state;
   TextEditingController city;
-  String idCountry='';
+  String? idCountry;
 
   InputBorder? textFieldInputBorder;
 
@@ -343,7 +343,7 @@ class _CountryStateCityPicker2State extends State<CountryStateCityPicker2> {
                                 onTap: ()async{
                                   setState((){
                                     if(_title=="Country"){
-                                      widget.country.text= _countrySubList[index].name;
+                                     widget.country.text= _countrySubList[index].name;
                                       widget.idCountry= _countrySubList[index].id;
                                       _getState(_countrySubList[index].id);
                                       _countrySubList=_countryList;
