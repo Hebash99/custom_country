@@ -122,7 +122,7 @@ class _CountryStateCityPicker2State extends State<CountryStateCityPicker2> {
             ),
             isDense: true,
 
-            hintText: 'Country',
+            hintText: 'Couuuuntry',
             hintStyle:
             TextStyle(
               fontSize: 20,
