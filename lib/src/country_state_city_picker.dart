@@ -67,7 +67,6 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   for(int i=0;i<_countryList.length;i++)
     {
       if(_countryList[i].name==countryName){
-        print(_countryList[i].id);
         widget.initialCountryID= _countryList[i].id;
         _getIDState(widget.initialCountryID,widget.initialState);
       }
@@ -111,7 +110,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     );
     _stateSubList=_stateList;
     for(int i=0;i<_stateList.length;i++){
-      if(_stateList[i].name=stateName){
+      if(_stateList[i].name==stateName){
         widget.initialStateID=_stateList[i].id;
         _getCity(widget.initialStateID);
       }
