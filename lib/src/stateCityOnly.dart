@@ -1,4 +1,3 @@
-
 import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart' show rootBundle;
@@ -10,23 +9,22 @@ class CountryStateCityPicker3 extends StatefulWidget {
   TextEditingController country;
   TextEditingController state;
   TextEditingController city;
+
   String? initialCountry;
-
-
-  String initialCountryID='888';
-
+  String? initialState;
+  String? initialCity;
   InputBorder? textFieldInputBorder;
 
 
-
-  CountryStateCityPicker3({required this.country,required this.state,required this.city,required this.initialCountry,
-    this.textFieldInputBorder});
+  String initialCountryID='888';
+  String initialStateID='888';
+  CountryStateCityPicker3({required this.country, required this.state, required this.city,this.initialCountry,this.textFieldInputBorder});
 
   @override
   _CountryStateCityPicker3State createState() => _CountryStateCityPicker3State();
 }
 
-class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
+class _CountryStateCityPicker3State extends State<CountryStateCityPicke3r> {
   List<CountryModel> _countryList=[];
   List<StateModel> _stateList=[];
   List<CityModel> _cityList=[];
@@ -52,9 +50,7 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
       _countryList = body.map((dynamic item) => CountryModel.fromJson(item)).toList();
       _countrySubList=_countryList;
     });
-
   }
-
 
   Future<void> _getIDCountry(String? countryName) async{
     _countryList.clear();
@@ -68,7 +64,7 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
     {
       if(_countryList[i].name==countryName){
         widget.initialCountryID= _countryList[i].id;
-        _getState(widget.initialCountryID);
+        _getIDState(widget.initialCountryID,widget.initialState);
       }
     }
 
@@ -92,6 +88,26 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
     _stateSubList=_stateList;
   }
 
+  Future<void> _getIDState(String countryId,String? stateName)async{
+    _stateList.clear();
+    _cityList.clear();
+    List<StateModel> _subStateList=[];
+    var jsonString = await rootBundle.loadString('packages/country_state_city_pro/assets/state.json');
+    List<dynamic> body = json.decode(jsonString);
+
+    _subStateList = body.map((dynamic item) => StateModel.fromJson(item)).toList();
+    _subStateList.forEach((element) {
+      if(element.countryId==countryId){
+        setState(() {
+          _stateList.add(element);
+        });
+      }
+    }
+    );
+    _stateSubList=_stateList;
+  }
+
+
   Future<void> _getCity(String stateId)async{
     _cityList.clear();
     List<CityModel> _subCityList=[];
@@ -114,61 +130,114 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
     return Column(
       children: [
         ///Country TextField
-     
+        // TextFormField(
+        //   controller: widget.country,
+        //   validator: (String? value) {
+        //     if (value == null || value == '') {
+        //       return 'Please enter country';
+        //     }
+        //     return null;
+        //   },
+        //   cursorColor: const Color(0xFFF16B52),
+        //   cursorWidth: 3,
+        //   onTap: (){
+        //     setState(()=>_title='Country');
+        //     _showDialog(context);
+        //   },
+        //   style: const TextStyle(
+        //     decoration: TextDecoration.none,
+        //     fontSize: 20,
+        //   ),
+        //   decoration: InputDecoration(
+        //     contentPadding: EdgeInsets.only(left: 20),
+        //     fillColor: const Color(0xFFFAFAFA),
+        //     //        contentPadding: const EdgeInsets.fromLTRB(20, 30, 20, 0),
+        //     border: OutlineInputBorder(
+        //       borderRadius: BorderRadius.circular(20.0),
+        //     ),
+        //     isDense: true,
+        //
+        //     hintText: 'Country',
+        //     hintStyle:
+        //     TextStyle(
+        //       fontSize: 20,
+        //       fontWeight: FontWeight.w700,
+        //       color: Color(0xFFB4B3B3),
+        //     ),
+        //     suffixIcon: Icon(Icons.arrow_drop_down,color: Color(0xFFF16B52),),
+        //     focusedBorder: OutlineInputBorder(
+        //         borderRadius: BorderRadius.circular(20.0),
+        //         borderSide: const BorderSide(
+        //             color: Color(0xFFF16B52),
+        //             width: 3
+        //         )
+        //     ),
+        //     enabledBorder: OutlineInputBorder(
+        //         borderRadius: BorderRadius.circular(20.0),
+        //         borderSide: const BorderSide(
+        //             color: Color(0xFFE5E5E5),
+        //             width: 2
+        //         )),
+        //
+        //   ),
+        //   readOnly: true,
+        // ),
+        //
+        // SizedBox(height: 8.0),
 
         ///State TextFormField
         TextFormField(
-         controller: widget.state,
+          controller: widget.state,
           validator: (String? value) {
             if (value == null || value == '') {
               return 'Please enter state';
             }
             return null;
           },
-         onTap: (){
-           setState(()=>_title='State');
-           if(widget.country.text.isNotEmpty)
-             _showDialog(context);
-           else _showSnackBar('Select Country');
-         },
+          onTap: (){
+            setState(()=>_title='State');
+            if(widget.country.text.isNotEmpty)
+              _showDialog(context);
+            else _showSnackBar('Select Country');
+          },
           style: const TextStyle(
             decoration: TextDecoration.none,
             fontSize: 20,
           ),
-         decoration: InputDecoration(
-           contentPadding: EdgeInsets.only(left: 20),
-           fillColor: const Color(0xFFFAFAFA),
-           border: OutlineInputBorder(
-             borderRadius: BorderRadius.circular(20.0),
-           ),
-           isDense: true,
-           hintText: 'State',
-           hintStyle:TextStyle(
-             fontSize: 20,
-             fontWeight: FontWeight.w700,
-             color: Color(0xFFB4B3B3),
-           ),
-           suffixIcon: Icon(Icons.arrow_drop_down,color: Color(0xFFF16B52),),
-           focusedBorder: OutlineInputBorder(
-               borderRadius: BorderRadius.circular(20.0),
-               borderSide: const BorderSide(
-                   color: Color(0xFFF16B52),
-                   width: 3
-               )
-           ),
-           enabledBorder: OutlineInputBorder(
-               borderRadius: BorderRadius.circular(20.0),
-               borderSide: const BorderSide(
-                   color: Color(0xFFE5E5E5),
-                   width: 2
-               )),
-         ),
-         readOnly: true,
-       ),
+          decoration: InputDecoration(
+            contentPadding: EdgeInsets.only(left: 20),
+            fillColor: const Color(0xFFFAFAFA),
+            border: OutlineInputBorder(
+              borderRadius: BorderRadius.circular(20.0),
+            ),
+            isDense: true,
+            hintText: 'State',
+            hintStyle:TextStyle(
+              fontSize: 20,
+              fontWeight: FontWeight.w700,
+              color: Color(0xFFB4B3B3),
+            ),
+            suffixIcon: Icon(Icons.arrow_drop_down,color: Color(0xFFF16B52),),
+            focusedBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20.0),
+                borderSide: const BorderSide(
+                    color: Color(0xFFF16B52),
+                    width: 3
+                )
+            ),
+            enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(20.0),
+                borderSide: const BorderSide(
+                    color: Color(0xFFE5E5E5),
+                    width: 2
+                )),
+          ),
+          readOnly: true,
+        ),
         SizedBox(height: 8.0),
 
         ///City TextField
-         TextField(
+        TextField(
           controller: widget.city,
           onTap: (){
             setState(()=>_title='City');
@@ -176,10 +245,10 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
               _showDialog(context);
             else _showSnackBar('Select State');
           },
-           style: const TextStyle(
-             decoration: TextDecoration.none,
-             fontSize: 20,
-           ),
+          style: const TextStyle(
+            decoration: TextDecoration.none,
+            fontSize: 20,
+          ),
           decoration: InputDecoration(
             contentPadding: EdgeInsets.only(left: 20),
             fillColor: const Color(0xFFFAFAFA),
@@ -210,6 +279,7 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
           ),
           readOnly: true,
         ),
+
       ],
     );
   }
@@ -239,146 +309,144 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
                     color: Colors.white,
                     borderRadius: BorderRadius.circular(20),
                   ),
-                child: Padding(
-                  padding: const EdgeInsets.all(20),
-                  child: Column(
+                  child: Padding(
+                    padding: const EdgeInsets.all(20),
+                    child: Column(
 
-                    children: [
-                      SizedBox(height: 10),
-                      Text(_title,style: TextStyle(color:Colors.grey.shade800,
-                          fontSize: 17,fontWeight: FontWeight.w500)),
-                      SizedBox(height: 10),
-                      ///Text Field
-                      TextField(
-                        cursorColor: const Color(0xFFF16B52),
-                        controller: _title=='Country'
-                            ? _controller
-                            : _title=='State'
-                            ? _controller2
-                            : _controller3,
-                        onChanged: (val){
-                          setState(() {
-                            if(_title=='Country'){
-                              _countrySubList = _countryList.where((element) =>
-                                  element.name.toLowerCase().contains(_controller.text.toLowerCase())).toList();
-                            }
-                            else if(_title=='State'){
-                              _stateSubList = _stateList.where((element) =>
-                                  element.name.toLowerCase().contains(_controller2.text.toLowerCase())).toList();
-                            }
-                            else if(_title=='City'){
-                              _citySubList = _cityList.where((element) =>
-                                  element.name.toLowerCase().contains(_controller3.text.toLowerCase())).toList();
-                            }
-                          });
-                        },
-                        style: TextStyle(
-                            color: Colors.grey.shade800,
-                            fontSize: 16.0
-                        ),
-                        decoration: InputDecoration(
-                            border: OutlineInputBorder(
-                              borderRadius: BorderRadius.circular(20.0),
-                            ),
-                            focusedBorder: OutlineInputBorder(
+                      children: [
+                        SizedBox(height: 10),
+                        Text(_title,style: TextStyle(color:Colors.grey.shade800,
+                            fontSize: 17,fontWeight: FontWeight.w500)),
+                        SizedBox(height: 10),
+                        ///Text Field
+                        TextField(
+                          cursorColor: const Color(0xFFF16B52),
+                          controller: _title=='Country'
+                              ? _controller
+                              : _title=='State'
+                              ? _controller2
+                              : _controller3,
+                          onChanged: (val){
+                            setState(() {
+                              if(_title=='Country'){
+                                _countrySubList = _countryList.where((element) =>
+                                    element.name.toLowerCase().contains(_controller.text.toLowerCase())).toList();
+                              }
+                              else if(_title=='State'){
+                                _stateSubList = _stateList.where((element) =>
+                                    element.name.toLowerCase().contains(_controller2.text.toLowerCase())).toList();
+                              }
+                              else if(_title=='City'){
+                                _citySubList = _cityList.where((element) =>
+                                    element.name.toLowerCase().contains(_controller3.text.toLowerCase())).toList();
+                              }
+                            });
+                          },
+                          style: TextStyle(
+                              color: Colors.grey.shade800,
+                              fontSize: 16.0
+                          ),
+                          decoration: InputDecoration(
+                              border: OutlineInputBorder(
                                 borderRadius: BorderRadius.circular(20.0),
-                                borderSide: const BorderSide(
-                                    color: Color(0xFFF16B52),
-                                    width: 3
-                                )
-                            ),
-                            enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(20.0),
-                                borderSide: const BorderSide(
-                                    color: Color(0xFFE5E5E5),
-                                    width: 2
-                                )),
-                            hintText: "Search here...",
-                            contentPadding: EdgeInsets.symmetric(vertical: 15,horizontal: 5),
-                            isDense: true,
-                            prefixIcon: Icon(Icons.search,color: Color(0xFFF16B52),)
-                        ),
-                      ),
-                      ///Dropdown Items
-                      Expanded(
-                        child: Container(
-                          child: ListView.builder(
-                            itemCount: _title=='Country'
-                                ? _countrySubList.length
-                                : _title=='State'
-                                ? _stateSubList.length
-                                : _citySubList.length,
-                            physics: ClampingScrollPhysics(),
-                            itemBuilder: (context,index){
-                              return InkWell(
-                                onTap: ()async{
-                                  setState((){
-                                    if(_title=="Country"){
-                                     widget.country.text= _countrySubList[index].name;
-                                   //   widget.countryID.text= _countrySubList[index].id;
-                                      _getState(_countrySubList[index].id);
-                                      _countrySubList=_countryList;
-                                      widget.state.clear();
-                                      widget.city.clear();
-                                    }
-                                    else if(_title=='State'){
-                                      widget.state.text= _stateSubList[index].name;
-                                      _getCity(_stateSubList[index].id);
-                                      _stateSubList = _stateList;
-                                      widget.city.clear();
-                                    }
-                                    else if(_title=='City'){
-                                      widget.city.text= _citySubList[index].name;
-
-                                      _citySubList = _cityList;
-                                    }
-                                  });
-                                  _controller.clear();
-                                  _controller2.clear();
-                                  _controller3.clear();
-                                  Navigator.pop(context);
-                                },
-                                child: Padding(
-                                  padding: EdgeInsets.only(bottom: 20.0,left: 10.0,right: 10.0),
-                                  child: Text(
-                                      _title=='Country'
-                                          ? _countrySubList[index].name
-                                          : _title=='State'
-                                          ? _stateSubList[index].name
-                                          :_citySubList[index].name,
-                                      style: TextStyle(
-                                          color: Colors.grey.shade800,
-                                          fontSize: 16.0
-                                      )),
-                                ),
-                              );
-                            },
+                              ),
+                              focusedBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  borderSide: const BorderSide(
+                                      color: Color(0xFFF16B52),
+                                      width: 3
+                                  )
+                              ),
+                              enabledBorder: OutlineInputBorder(
+                                  borderRadius: BorderRadius.circular(20.0),
+                                  borderSide: const BorderSide(
+                                      color: Color(0xFFE5E5E5),
+                                      width: 2
+                                  )),
+                              hintText: "Search here...",
+                              contentPadding: EdgeInsets.symmetric(vertical: 15,horizontal: 5),
+                              isDense: true,
+                              prefixIcon: Icon(Icons.search,color: Color(0xFFF16B52),)
                           ),
                         ),
-                      ),
-                      TextButton(
-                        onPressed: (){
-                          if(_title=='City' && _citySubList.isEmpty){
-                            widget.city.text= _controller3.text;
-                          }
-                          _countrySubList=_countryList;
-                          _stateSubList = _stateList;
-                          _citySubList = _cityList;
+                        ///Dropdown Items
+                        Expanded(
+                          child: Container(
+                            child: ListView.builder(
+                              itemCount: _title=='Country'
+                                  ? _countrySubList.length
+                                  : _title=='State'
+                                  ? _stateSubList.length
+                                  : _citySubList.length,
+                              physics: ClampingScrollPhysics(),
+                              itemBuilder: (context,index){
+                                return InkWell(
+                                  onTap: ()async{
+                                    setState((){
+                                      if(_title=="Country"){
+                                        widget.country.text= _countrySubList[index].name;
+                                        _getState(_countrySubList[index].id);
+                                        _countrySubList=_countryList;
+                                        widget.state.clear();
+                                        widget.city.clear();
+                                      }
+                                      else if(_title=='State'){
+                                        widget.state.text= _stateSubList[index].name;
+                                        _getCity(_stateSubList[index].id);
+                                        _stateSubList = _stateList;
+                                        widget.city.clear();
+                                      }
+                                      else if(_title=='City'){
+                                        widget.city.text= _citySubList[index].name;
+                                        _citySubList = _cityList;
+                                      }
+                                    });
+                                    _controller.clear();
+                                    _controller2.clear();
+                                    _controller3.clear();
+                                    Navigator.pop(context);
+                                  },
+                                  child: Padding(
+                                    padding: EdgeInsets.only(bottom: 20.0,left: 10.0,right: 10.0),
+                                    child: Text(
+                                        _title=='Country'
+                                            ? _countrySubList[index].name
+                                            : _title=='State'
+                                            ? _stateSubList[index].name
+                                            :_citySubList[index].name,
+                                        style: TextStyle(
+                                            color: Colors.grey.shade800,
+                                            fontSize: 16.0
+                                        )),
+                                  ),
+                                );
+                              },
+                            ),
+                          ),
+                        ),
+                        TextButton(
+                          onPressed: (){
+                            if(_title=='City' && _citySubList.isEmpty){
+                              widget.city.text= _controller3.text;
+                            }
+                            _countrySubList=_countryList;
+                            _stateSubList = _stateList;
+                            _citySubList = _cityList;
 
-                          _controller.clear();
-                          _controller2.clear();
-                          _controller3.clear();
-                          Navigator.pop(context);
-                        },
-                        child: Text('Close',
-                        style: TextStyle(
-                          color: Color(0xFFF16B52),
-                          fontSize: 16.0
-                        ),),
-                      )
-                    ],
+                            _controller.clear();
+                            _controller2.clear();
+                            _controller3.clear();
+                            Navigator.pop(context);
+                          },
+                          child: Text('Close',
+                            style: TextStyle(
+                                color: Color(0xFFF16B52),
+                                fontSize: 16.0
+                            ),),
+                        )
+                      ],
+                    ),
                   ),
-                ),
 
                 ),
               );
@@ -397,11 +465,11 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
 
   void _showSnackBar(String message){
     ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        backgroundColor: Color(0xFFF16B52),
-          content: Text(message,
-              textAlign: TextAlign.center,
-          style: TextStyle(color: Colors.white,fontSize: 20.0,fontWeight: FontWeight.bold)))
+        SnackBar(
+            backgroundColor: Color(0xFFF16B52),
+            content: Text(message,
+                textAlign: TextAlign.center,
+                style: TextStyle(color: Colors.white,fontSize: 20.0,fontWeight: FontWeight.bold)))
     );
   }
 }
