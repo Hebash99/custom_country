@@ -68,7 +68,7 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
 
     _subStateList = body.map((dynamic item) => StateModel.fromJson(item)).toList();
     _subStateList.forEach((element) {
-      if(element.countryId==countryId){
+      if(element.countryId==3){
         setState(() {
           _stateList.add(element);
         });
