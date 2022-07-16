@@ -9,15 +9,12 @@ class CountryStateCityPicker2 extends StatefulWidget {
   TextEditingController country;
   TextEditingController state;
   TextEditingController city;
-
-  String? initialCountry;
-  String? initialState;
-  String? initialCity;
+  int? idCountry;
+  
   InputBorder? textFieldInputBorder;
 
 
-  String initialCountryID='888';
-  String initialStateID='888';
+  
   CountryStateCityPicker2({required this.country, required this.state, required this.city,this.initialCountry,this.initialState,this.initialCity, this.textFieldInputBorder});
 
   @override
@@ -39,9 +36,6 @@ class _CountryStateCityPicker2State extends State<CountryStateCityPicker2> {
   void initState() {
     super.initState();
     _getCountry();
-    widget.country.text=widget.initialCountry as String;
-    widget.state.text=widget.initialState as String;
-    widget.city.text=widget.initialCity as String;
   }
 
   Future<void> _getCountry()async{
@@ -53,7 +47,7 @@ class _CountryStateCityPicker2State extends State<CountryStateCityPicker2> {
       _countrySubList=_countryList;
     });
   }
-  
+
 
   Future<void> _getState(String countryId)async{
     _stateList.clear();
@@ -72,7 +66,7 @@ class _CountryStateCityPicker2State extends State<CountryStateCityPicker2> {
     });
     _stateSubList=_stateList;
   }
-  
+
   Future<void> _getCity(String stateId)async{
     _cityList.clear();
     List<CityModel> _subCityList=[];
@@ -122,7 +116,7 @@ class _CountryStateCityPicker2State extends State<CountryStateCityPicker2> {
             ),
             isDense: true,
 
-            hintText: 'Couuuuntry',
+            hintText: 'Country',
             hintStyle:
             TextStyle(
               fontSize: 20,
@@ -350,6 +344,7 @@ class _CountryStateCityPicker2State extends State<CountryStateCityPicker2> {
                                   setState((){
                                     if(_title=="Country"){
                                       widget.country.text= _countrySubList[index].name;
+                                      widget.idCountry= _countrySubList[index].id;
                                       _getState(_countrySubList[index].id);
                                       _countrySubList=_countryList;
                                       widget.state.clear();
