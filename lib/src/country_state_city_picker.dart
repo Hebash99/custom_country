@@ -15,7 +15,8 @@ class CountryStateCityPicker extends StatefulWidget {
   String? initialCity;
   InputBorder? textFieldInputBorder;
 
-  String? initialCountryID;
+  
+  String initialCountryID='1';
 
   CountryStateCityPicker({required this.country, required this.state, required this.city,this.initialCountry,this.initialState,this.initialCity, this.textFieldInputBorder});
 
@@ -40,10 +41,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     super.initState();
     _getCountry();
     _getState('1');
- // (_getIDCountry(widget.initialCountry));
-   // _getStateInit(_getIDCountry(widget.initialCountry) as Future<String> );
-    
-    
+    widget.initialCountryID=_getIDCountry(widget.initialCountry);
     widget.country.text=widget.initialCountry as String;
     widget.state.text=widget.initialState as String;
     widget.city.text=widget.initialCity as String;
@@ -76,7 +74,6 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     }
    return '';
 }
-
   Future<void> _getState(String countryId)async{
     _stateList.clear();
     _cityList.clear();
@@ -94,6 +91,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     });
     _stateSubList=_stateList;
   }
+  
   Future<void> _getCity(String stateId)async{
     _cityList.clear();
     List<CityModel> _subCityList=[];
