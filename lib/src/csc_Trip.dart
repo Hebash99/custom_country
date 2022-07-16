@@ -9,13 +9,13 @@ class CountryStateCityPicker2 extends StatefulWidget {
   TextEditingController country;
   TextEditingController state;
   TextEditingController city;
-  int? idCountry;
-  
+  String? idCountry;
+
   InputBorder? textFieldInputBorder;
 
 
-  
-  CountryStateCityPicker2({required this.country, required this.state, required this.city,this.initialCountry,this.initialState,this.initialCity, this.textFieldInputBorder});
+
+  CountryStateCityPicker2({required this.country,required this.state,required this.city,this.idCountry, this.textFieldInputBorder});
 
   @override
   _CountryStateCityPicker2State createState() => _CountryStateCityPicker2State();
