@@ -13,9 +13,10 @@ class CountryStateCityPicker extends StatefulWidget {
   String? initialCountry;
   String? initialState;
   String? initialCity;
-
   InputBorder? textFieldInputBorder;
 
+  String? initialCountryID;
+  
   CountryStateCityPicker({required this.country, required this.state, required this.city,this.initialCountry,this.initialState,this.initialCity, this.textFieldInputBorder});
 
   @override
@@ -38,6 +39,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   void initState() {
     super.initState();
     _getCountry();
+    _getIDCountry(widget.initialCountry);
     widget.country.text=widget.initialCountry as String;
     widget.state.text=widget.initialState as String;
     widget.city.text=widget.initialCity as String;
@@ -52,7 +54,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
       _countrySubList=_countryList;
     });
   }
-Future<String> _getIDCountry(String countryName) async{
+Future<String?> _getIDCountry(String countryName) async{
   _countryList.clear();
   var jsonString = await rootBundle.loadString('packages/country_state_city_pro/assets/country.json');
   List<dynamic> body = json.decode(jsonString);
@@ -68,7 +70,7 @@ Future<String> _getIDCountry(String countryName) async{
       }
        
     }
-  return '65656';
+  // return '65656';
 }
 
   Future<void> _getState(String countryId)async{
@@ -108,7 +110,7 @@ Future<String> _getIDCountry(String countryName) async{
 
   @override
   Widget build(BuildContext context) {
-_getIDCountry('Albania');
+
     return Column(
       children: [
         ///Country TextField
