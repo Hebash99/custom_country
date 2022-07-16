@@ -5,7 +5,7 @@ import './model/city_model.dart';
 import './model/country_model.dart';
 import './model/state_model.dart';
 
-class CountryStateCityPicker2 extends StatefulWidget {
+class CountryStateCityPicker extends StatefulWidget {
   TextEditingController country;
   TextEditingController state;
   TextEditingController city;
@@ -13,20 +13,21 @@ class CountryStateCityPicker2 extends StatefulWidget {
   String? initialCountry;
   String? initialState;
   String? initialCity;
-
   InputBorder? textFieldInputBorder;
 
-  CountryStateCityPicker2({required this.country, required this.state, required this.city,this.initialCountry,this.initialState,this.initialCity, this.textFieldInputBorder});
+
+  String initialCountryID='888';
+  String initialStateID='888';
+  CountryStateCityPicker({required this.country, required this.state, required this.city,this.initialCountry,this.initialState,this.initialCity, this.textFieldInputBorder});
 
   @override
-  _CountryStateCityPicker2State createState() => _CountryStateCityPicker2State();
+  _CountryStateCityPickerState createState() => _CountryStateCityPickerState();
 }
 
-class _CountryStateCityPicker2State extends State<CountryStateCityPicker2> {
+class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   List<CountryModel> _countryList=[];
   List<StateModel> _stateList=[];
   List<CityModel> _cityList=[];
-
   List<CountryModel> _countrySubList=[];
   List<StateModel> _stateSubList=[];
   List<CityModel> _citySubList=[];
@@ -38,6 +39,8 @@ class _CountryStateCityPicker2State extends State<CountryStateCityPicker2> {
   void initState() {
     super.initState();
     _getCountry();
+    _getIDCountry(widget.initialCountry);
+    print(widget.initialCountryID);
     widget.country.text=widget.initialCountry as String;
     widget.state.text=widget.initialState as String;
     widget.city.text=widget.initialCity as String;
@@ -53,6 +56,23 @@ class _CountryStateCityPicker2State extends State<CountryStateCityPicker2> {
     });
   }
 
+  Future<void> _getIDCountry(String? countryName) async{
+  _countryList.clear();
+  var jsonString = await rootBundle.loadString('packages/country_state_city_pro/assets/country.json');
+  List<dynamic> body = json.decode(jsonString);
+  setState(() {
+    _countryList = body.map((dynamic item) => CountryModel.fromJson(item)).toList();
+    _countrySubList=_countryList;
+  });
+  for(int i=0;i<_countryList.length;i++)
+    {
+      if(_countryList[i].name==countryName){
+        widget.initialCountryID= _countryList[i].id;
+        _getIDState(widget.initialCountryID,widget.initialState);
+      }
+    }
+
+}
 
   Future<void> _getState(String countryId)async{
     _stateList.clear();
@@ -71,6 +91,32 @@ class _CountryStateCityPicker2State extends State<CountryStateCityPicker2> {
     });
     _stateSubList=_stateList;
   }
+
+  Future<void> _getIDState(String countryId,String? stateName)async{
+    _stateList.clear();
+    _cityList.clear();
+    List<StateModel> _subStateList=[];
+    var jsonString = await rootBundle.loadString('packages/country_state_city_pro/assets/state.json');
+    List<dynamic> body = json.decode(jsonString);
+
+    _subStateList = body.map((dynamic item) => StateModel.fromJson(item)).toList();
+    _subStateList.forEach((element) {
+      if(element.countryId==countryId){
+        setState(() {
+          _stateList.add(element);
+        });
+      }
+    }
+    );
+    _stateSubList=_stateList;
+    for(int i=0;i<_stateList.length;i++){
+      if(_stateList[i].name==stateName){
+        widget.initialStateID=_stateList[i].id;
+        _getCity(widget.initialStateID);
+      }
+    }
+  }
+
 
   Future<void> _getCity(String stateId)async{
     _cityList.clear();
@@ -91,7 +137,6 @@ class _CountryStateCityPicker2State extends State<CountryStateCityPicker2> {
 
   @override
   Widget build(BuildContext context) {
-
     return Column(
       children: [
         ///Country TextField
