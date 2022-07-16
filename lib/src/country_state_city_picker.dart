@@ -40,10 +40,9 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
   void initState() {
     super.initState();
     _getCountry();
+    _getIDCountry(widget.initialCountry);
+    print(widget.initialCountryID);
     _getState('1');
-
-    widget.initialCountryID= await _getIDCountry(widget.initialCountry);
-
     widget.country.text=widget.initialCountry as String;
     widget.state.text=widget.initialState as String;
     widget.city.text=widget.initialCity as String;
@@ -59,7 +58,7 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     });
   }
 
-  Future<String> _getIDCountry(String? countryName) async{
+  Future<void> _getIDCountry(String? countryName) async{
   _countryList.clear();
   var jsonString = await rootBundle.loadString('packages/country_state_city_pro/assets/country.json');
   List<dynamic> body = json.decode(jsonString);
@@ -71,10 +70,11 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     {
       if(_countryList[i].name==countryName){
         print(_countryList[i].id);
-        return _countryList[i].id as String;
+        widget.initialCountryID= _countryList[i].id;
+        //return _countryList[i].id as String;
       }
     }
-   return '';
+
 }
   Future<void> _getState(String countryId)async{
     _stateList.clear();
