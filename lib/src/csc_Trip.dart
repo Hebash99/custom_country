@@ -15,7 +15,7 @@ class CountryStateCityPicker2 extends StatefulWidget {
 
 
 
-  CountryStateCityPicker2({required this.country,required this.state,required this.city,this.idCountry, this.textFieldInputBorder});
+  CountryStateCityPicker2({required this.country,required this.state,required this.city,required this.idCountry, this.textFieldInputBorder});
 
   @override
   _CountryStateCityPicker2State createState() => _CountryStateCityPicker2State();
