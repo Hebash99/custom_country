@@ -71,12 +71,12 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
       if(_countryList[i].name==countryName){
         print(_countryList[i].id);
         widget.initialCountryID= _countryList[i].id;
-        _getIDState(widget.initialCountryID);
+        _getIDState(widget.initialCountryID,widget.initialState);
       }
     }
 
 }
- 
+
   Future<void> _getState(String countryId)async{
     _stateList.clear();
     _cityList.clear();
@@ -94,8 +94,8 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     });
     _stateSubList=_stateList;
   }
-  
-  Future<void> _getIDState(String countryId)async{
+
+  Future<void> _getIDState(String countryId,String? stateName)async{
     _stateList.clear();
     _cityList.clear();
     List<StateModel> _subStateList=[];
@@ -112,8 +112,8 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     });
     _stateSubList=_stateList;
   }
-  
-  
+
+
   Future<void> _getCity(String stateId)async{
     _cityList.clear();
     List<CityModel> _subCityList=[];
