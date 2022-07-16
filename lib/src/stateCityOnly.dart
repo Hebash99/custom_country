@@ -10,16 +10,16 @@ class CountryStateCityPicker3 extends StatefulWidget {
   TextEditingController country;
   TextEditingController state;
   TextEditingController city;
-  String countryID;
-  TextEditingController stateID;
-  TextEditingController cityID;
+  String? initialCountry;
+
+
+  String initialCountryID='888';
 
   InputBorder? textFieldInputBorder;
 
 
 
-  CountryStateCityPicker3({required this.country,required this.state,required this.city,required this.countryID,
-    required this.stateID,required this.cityID,
+  CountryStateCityPicker3({required this.country,required this.state,required this.city,required this.initialCountry,
     this.textFieldInputBorder});
 
   @override
@@ -42,7 +42,7 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
     super.initState();
     print(widget.countryID);
     _getCountry();
-
+    _getIDCountry(widget.initialCountry);
   }
 
   Future<void> _getCountry()async{
@@ -53,10 +53,27 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
       _countryList = body.map((dynamic item) => CountryModel.fromJson(item)).toList();
       _countrySubList=_countryList;
     });
-    _getState(countryID);
+
   }
 
 
+  Future<void> _getIDCountry(String? countryName) async{
+    _countryList.clear();
+    var jsonString = await rootBundle.loadString('packages/country_state_city_pro/assets/country.json');
+    List<dynamic> body = json.decode(jsonString);
+    setState(() {
+      _countryList = body.map((dynamic item) => CountryModel.fromJson(item)).toList();
+      _countrySubList=_countryList;
+    });
+    for(int i=0;i<_countryList.length;i++)
+    {
+      if(_countryList[i].name==countryName){
+        widget.initialCountryID= _countryList[i].id;
+        _getState(widget.initialCountryID);
+      }
+    }
+
+  }
 
   Future<void> _getState(String countryId)async{
     print(widget.countryID);
@@ -155,55 +172,55 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
         SizedBox(height: 8.0),
 
         ///State TextFormField
-        TextFormField(
-         controller: widget.state,
-          validator: (String? value) {
-            if (value == null || value == '') {
-              return 'Please enter state';
-            }
-            return null;
-          },
-         onTap: (){
-           setState(()=>_title='State');
-           if(widget.country.text.isNotEmpty)
-             _showDialog(context);
-           else _showSnackBar('Select Country');
-         },
-          style: const TextStyle(
-            decoration: TextDecoration.none,
-            fontSize: 20,
-          ),
-         decoration: InputDecoration(
-           contentPadding: EdgeInsets.only(left: 20),
-           fillColor: const Color(0xFFFAFAFA),
-           border: OutlineInputBorder(
-             borderRadius: BorderRadius.circular(20.0),
-           ),
-           isDense: true,
-           hintText: 'State',
-           hintStyle:TextStyle(
-             fontSize: 20,
-             fontWeight: FontWeight.w700,
-             color: Color(0xFFB4B3B3),
-           ),
-           suffixIcon: Icon(Icons.arrow_drop_down,color: Color(0xFFF16B52),),
-           focusedBorder: OutlineInputBorder(
-               borderRadius: BorderRadius.circular(20.0),
-               borderSide: const BorderSide(
-                   color: Color(0xFFF16B52),
-                   width: 3
-               )
-           ),
-           enabledBorder: OutlineInputBorder(
-               borderRadius: BorderRadius.circular(20.0),
-               borderSide: const BorderSide(
-                   color: Color(0xFFE5E5E5),
-                   width: 2
-               )),
-         ),
-         readOnly: true,
-       ),
-        SizedBox(height: 8.0),
+       //  TextFormField(
+       //   controller: widget.state,
+       //    validator: (String? value) {
+       //      if (value == null || value == '') {
+       //        return 'Please enter state';
+       //      }
+       //      return null;
+       //    },
+       //   onTap: (){
+       //     setState(()=>_title='State');
+       //     if(widget.country.text.isNotEmpty)
+       //       _showDialog(context);
+       //     else _showSnackBar('Select Country');
+       //   },
+       //    style: const TextStyle(
+       //      decoration: TextDecoration.none,
+       //      fontSize: 20,
+       //    ),
+       //   decoration: InputDecoration(
+       //     contentPadding: EdgeInsets.only(left: 20),
+       //     fillColor: const Color(0xFFFAFAFA),
+       //     border: OutlineInputBorder(
+       //       borderRadius: BorderRadius.circular(20.0),
+       //     ),
+       //     isDense: true,
+       //     hintText: 'State',
+       //     hintStyle:TextStyle(
+       //       fontSize: 20,
+       //       fontWeight: FontWeight.w700,
+       //       color: Color(0xFFB4B3B3),
+       //     ),
+       //     suffixIcon: Icon(Icons.arrow_drop_down,color: Color(0xFFF16B52),),
+       //     focusedBorder: OutlineInputBorder(
+       //         borderRadius: BorderRadius.circular(20.0),
+       //         borderSide: const BorderSide(
+       //             color: Color(0xFFF16B52),
+       //             width: 3
+       //         )
+       //     ),
+       //     enabledBorder: OutlineInputBorder(
+       //         borderRadius: BorderRadius.circular(20.0),
+       //         borderSide: const BorderSide(
+       //             color: Color(0xFFE5E5E5),
+       //             width: 2
+       //         )),
+       //   ),
+       //   readOnly: true,
+       // ),
+       //  SizedBox(height: 8.0),
 
         ///City TextField
          TextField(
