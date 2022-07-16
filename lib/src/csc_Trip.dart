@@ -9,13 +9,13 @@ class CountryStateCityPicker2 extends StatefulWidget {
   TextEditingController country;
   TextEditingController state;
   TextEditingController city;
-  String? idCountry;
+  TextEditingController countryID;
 
   InputBorder? textFieldInputBorder;
 
 
 
-  CountryStateCityPicker2({required this.country,required this.state,required this.city,required this.idCountry, this.textFieldInputBorder});
+  CountryStateCityPicker2({required this.country,required this.state,required this.city,required this.countryID, this.textFieldInputBorder});
 
   @override
   _CountryStateCityPicker2State createState() => _CountryStateCityPicker2State();
@@ -345,7 +345,7 @@ class _CountryStateCityPicker2State extends State<CountryStateCityPicker2> {
                                     if(_title=="Country"){
                                      widget.country.text= _countrySubList[index].name;
                                     print(_countrySubList[index].id);
-                                      widget.idCountry= _countrySubList[index].id;
+                                      widget.countryID.text= _countrySubList[index].id;
                                       print(widget.idCountry);
                                       _getState(_countrySubList[index].id);
                                       _countrySubList=_countryList;
