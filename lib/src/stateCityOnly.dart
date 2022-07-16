@@ -41,8 +41,8 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
   void initState() {
     super.initState();
     print(widget.countryID);
-   // _getCountry();
-    _getState(widget.countryID);
+    _getCountry();
+    
   }
 
   Future<void> _getCountry()async{
@@ -53,6 +53,7 @@ class _CountryStateCityPicker3State extends State<CountryStateCityPicker3> {
       _countryList = body.map((dynamic item) => CountryModel.fromJson(item)).toList();
       _countrySubList=_countryList;
     });
+    _getState(widget.countryID);
   }
 
 
