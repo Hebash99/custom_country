@@ -92,7 +92,23 @@ class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
     });
     _stateSubList=_stateList;
   }
+  Future<void> _getStateInit(Future<String> countryId)async{
+    _stateList.clear();
+    _cityList.clear();
+    List<StateModel> _subStateList=[];
+    var jsonString = await rootBundle.loadString('packages/country_state_city_pro/assets/state.json');
+    List<dynamic> body = json.decode(jsonString);
 
+    _subStateList = body.map((dynamic item) => StateModel.fromJson(item)).toList();
+    _subStateList.forEach((element) {
+      if(element.countryId==countryId){
+        setState(() {
+          _stateList.add(element);
+        });
+      }
+    });
+    _stateSubList=_stateList;
+  }
   Future<void> _getCity(String stateId)async{
     _cityList.clear();
     List<CityModel> _subCityList=[];
