@@ -9,7 +9,7 @@ class CountryStateCityPicker2 extends StatefulWidget {
   TextEditingController country;
   TextEditingController state;
   TextEditingController city;
-  String? idCountry;
+  String idCountry='';
 
   InputBorder? textFieldInputBorder;
 
