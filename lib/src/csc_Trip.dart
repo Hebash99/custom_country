@@ -16,13 +16,13 @@ class CountryStateCityPicker2 extends StatefulWidget {
 
   InputBorder? textFieldInputBorder;
 
-  CountryStateCityPicker({required this.country, required this.state, required this.city,this.initialCountry,this.initialState,this.initialCity, this.textFieldInputBorder});
+  CountryStateCityPicker2({required this.country, required this.state, required this.city,this.initialCountry,this.initialState,this.initialCity, this.textFieldInputBorder});
 
   @override
-  _CountryStateCityPickerState createState() => _CountryStateCityPickerState();
+  _CountryStateCityPicker2State createState() => _CountryStateCityPicker2State();
 }
 
-class _CountryStateCityPickerState extends State<CountryStateCityPicker> {
+class _CountryStateCityPicker2State extends State<CountryStateCityPicker2> {
   List<CountryModel> _countryList=[];
   List<StateModel> _stateList=[];
   List<CityModel> _cityList=[];
