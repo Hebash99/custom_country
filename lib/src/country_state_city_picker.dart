@@ -16,7 +16,7 @@ class CountryStateCityPicker extends StatefulWidget {
   InputBorder? textFieldInputBorder;
 
   String? initialCountryID;
-  
+
   CountryStateCityPicker({required this.country, required this.state, required this.city,this.initialCountry,this.initialState,this.initialCity, this.textFieldInputBorder});
 
   @override
@@ -66,11 +66,10 @@ Future<String?> _getIDCountry(String countryName) async{
     {
       if(_countryList[i].name==countryName){
         print(_countryList[i].id);
-        return _countryList[i].id;
+        return _countryList[i].id as String;
       }
-       
     }
-  // return '65656';
+   return '';
 }
 
   Future<void> _getState(String countryId)async{
